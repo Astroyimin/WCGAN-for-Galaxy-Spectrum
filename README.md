@@ -2,7 +2,7 @@
 This repository contains the project code developed during the Asian Astro AI Workshop in Osaka, Japan.
 
 # Structure of Model
-The script, **Model.py**, describe the main model structure of this project. The cbam residual block is described in **ResNet.py**. Moreover, one Jupyter Note Book is exist to help you understand this structure better. [Residual connection paper]([url](https://arxiv.org/abs/1512.03385))  [GAN paper](https://arxiv.org/abs/1406.2661) 
+The script, **Model.py**, describe the main model structure of this project. The cbam residual block is described in **ResNet.py**. Moreover, one Jupyter Note Book is exist to help you understand this structure better. [Residual Connection](https://arxiv.org/abs/1512.03385) [GAN paper](https://arxiv.org/abs/1406.2661)
 ## Generator 
 The Generator starts with a Multi-Layer Perceptron (MLP) that includes two hidden layers to extract initial features. Following the MLP, we use a ResNet-18 architecture, with an opti
 
