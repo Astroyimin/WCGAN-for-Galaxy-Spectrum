@@ -2,6 +2,7 @@
 This repository contains the project code developed during the Asian Astro AI Workshop in Osaka, Japan.
 
 # Structure of Model
+The script, **Model.py**, describe the main model structure of this project. The cbam residual block is described in **ResNet.py**. Moreover, one Jupyter Note Book is exist to help you understand this structure better. 
 ## Generator 
 The Generator starts with a Multi-Layer Perceptron (MLP) that includes two hidden layers to extract initial features. Following the MLP, we use a ResNet-18 architecture, with an opti
 
@@ -9,7 +10,7 @@ The Generator starts with a Multi-Layer Perceptron (MLP) that includes two hidde
 The Discriminator consists of three convolutional layers, each followed by a max pooling layer. After the convolutional layers, a fully connected layer is used to differentiate between real and generated spectra.
 
 # Training Script for WCGAN
-This script, Training.py, implements the training process for a Wasserstein Conditional GAN (WCGAN) designed to generate galaxy spectra. The WCGAN architecture combines the stability of the Wasserstein GAN with the conditioning on input parameters to generate realistic and diverse spectra based on specific physical conditions.
+The script, Training.py, implements the training process for a Wasserstein Conditional GAN (WCGAN) designed to generate galaxy spectra. The WCGAN architecture combines the stability of the Wasserstein GAN with the conditioning on input parameters to generate realistic and diverse spectra based on specific physical conditions.
 
 ## Key Features:
 ***Wasserstein Loss*** The training leverages the Wasserstein loss function, which provides a more stable and effective training process by minimizing the Wasserstein distance between the real and generated distributions
