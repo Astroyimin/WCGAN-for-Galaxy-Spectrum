@@ -21,4 +21,5 @@ The model is conditioned on input parameters, allowing it to generate spectra th
 The training process is controlled by a set of hyperparameters, which can be adjusted to optimize performance. The script outputs the trained models, loss metrics, and sample spectra at various epochs, providing insights into the model's progress and effectiveness.
 
 # Visualizable Training
-You can see the information in Tensorboard. Addtionally, it support user add more information during the training by adding the tensorboard script.
+You can see the information in Tensorboard. Addtionally, it support user add more information during the training by adding the tensorboard script. Please see [TensorBoard](https://www.tensorflow.org/tensorboard?hl=zh-cn) for more information.
+
