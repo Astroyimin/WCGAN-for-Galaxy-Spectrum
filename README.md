@@ -14,6 +14,7 @@ The script, Training.py, implements the training process for a Wasserstein Condi
 
 ## Key Features:
 ***Wasserstein Loss*** The training leverages the Wasserstein loss function, which provides a more stable and effective training process by minimizing the Wasserstein distance between the real and generated distributions
+
 ***Conditional GAN***
 The model is conditioned on input parameters, allowing it to generate spectra that adhere to the specified conditions, enhancing the model's controllability and precision.
 ## Usage
