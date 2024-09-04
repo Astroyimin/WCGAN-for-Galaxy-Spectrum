@@ -4,7 +4,7 @@ This repository contains the project code developed during the Asian Astro AI Wo
 # Structure of Model
 The script, **Model.py**, describe the main model structure of this project. The cbam residual block is described in **ResNet.py**. Moreover, one Jupyter Note Book is exist to help you understand this structure better. [Residual Connection](https://arxiv.org/abs/1512.03385) [GAN paper](https://arxiv.org/abs/1406.2661)
 ## Generator 
-The Generator starts with a Multi-Layer Perceptron (MLP) that includes two hidden layers to extract initial features. Following the MLP, we use a ResNet-18 architecture, with an opti
+The Generator starts with a Multi-Layer Perceptron (MLP) that includes two hidden layers to extract initial features. Following the MLP, we use a ResNet-18 architecture, with an optional CBAM attention mechanism. [CBAM](https://arxiv.org/pdf/1807.06521)
 
 ## Discriminator
 The Discriminator consists of three convolutional layers, each followed by a max pooling layer. After the convolutional layers, a fully connected layer is used to differentiate between real and generated spectra.
