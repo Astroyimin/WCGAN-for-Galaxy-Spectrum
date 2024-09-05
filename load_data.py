@@ -2,6 +2,9 @@ import h5py
 import numpy as np
 import torch
 
+def min_max_norm(x):
+    x = (x-np.min(x))/(np.max(x)-np.min(x))
+    return(x)
 def datavalue(sp_size):
     f_data = h5py.File("sdss_galaxy_spec.hdf5", "r")
 
@@ -39,7 +42,11 @@ def datavalue(sp_size):
     print('Necessary Shape')
     print('spec:',specs.shape,'age',age.shape,'metallicity',metallicity.shape,'smass',smass.shape,'z',z.shape)
 
-    condition = np.stack((age, metallicity, smass,z), axis=1)
+    condition = np.stack((min_max_norm(age), 
+                          min_max_norm(metallicity), 
+                          min_max_norm(smass),
+                          min_max_norm(z)
+                          ), axis=1)
     print('Shape of condition (shape):',condition.shape)
 
     shape  =specs.shape
@@ -51,7 +58,7 @@ def datavalue(sp_size):
     print('Shape of the low energy bins spectra',shape)
     return specs_low_res,condition
 
-def prepareDataSet(specs_low_res,condition,train_len,val_len,device,batchsize):
+def prepareDataSet(specs_low_res,condition,train_len,val_len,device,batchsize,shuffle=True):
     def assignData(ndata_train,ndata_val,data):
         training_data = data[:ndata_train-ndata_val]
         val_data = data[ndata_train-ndata_val:ndata_train]
@@ -65,14 +72,13 @@ def prepareDataSet(specs_low_res,condition,train_len,val_len,device,batchsize):
 
     def DataLoader(X,Y,batchsize):
         dataset = torch.utils.data.TensorDataset(X, Y)
-        train_loader = torch.utils.data.DataLoader(dataset, batch_size=batchsize, shuffle=True)
+        train_loader = torch.utils.data.DataLoader(dataset, batch_size=batchsize, shuffle=shuffle)
         return train_loader
     # normalization
     normalized_data = specs_low_res - np.min(specs_low_res) + 1
     normalized_data = np.log10( normalized_data )
     min_val, max_val = np.min(normalized_data), np.max(normalized_data)
     normalized_data = (normalized_data - min_val) / (max_val - min_val)
-
     # divide into training / validation / test data
     ndata = len(specs_low_res)
     ndata_train = train_len
@@ -85,5 +91,13 @@ def prepareDataSet(specs_low_res,condition,train_len,val_len,device,batchsize):
     print("training data size: ", training_data.size(),'label: ',training_label.size())
     print("validation data size: ", val_data.size(),'label: ',val_label.size())
     print("test data size: ", test_data.size(),'label: ',test_label.size())
+<<<<<<< HEAD
+
+    return DataLoader(training_data,training_label,batchsize)
+=======
     return DataLoader(training_data,training_label)
+>>>>>>> parent of 364e339 (Training and file)
+
+
+
 

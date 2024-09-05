@@ -88,7 +88,7 @@ class BottleneckBlock(nn.Module):
         self.conv3 = nn.Conv1d(planes, planes * 4, kernel_size=1, bias=False)
         self.bn3 = nn.BatchNorm1d(planes * 4)
 
-        self.ca = ChannelAttention(planes*4)
+        self.ca = ChannelAttention(planes*self.expansion)
         self.sa = SpatialAttention()
 
 
@@ -132,10 +132,10 @@ class ResNet(nn.Module):
         self.layer1 = self._make_layer(block, 64, layers[0],cbam)
         self.layer2 = self._make_layer(block, 128, layers[1], cbam,stride=2)
         self.layer3 = self._make_layer(block, 256, layers[2], cbam,stride=2)
-        self.layer4 = self._make_layer(block, 512, layers[3], cbam,stride=2)
+        # self.layer4 = self._make_layer(block, 512, layers[3], cbam,stride=2)
 
         self.avgpool = nn.AdaptiveAvgPool1d(1)
-        self.fc = nn.Linear(512*block.expansion,num_classes)
+        self.fc = nn.Linear(128*block.expansion,num_classes)
         self.Linear = linear
 
     def _make_layer(self, block, out_channels, blocks, cbam,stride=1):
@@ -159,7 +159,7 @@ class ResNet(nn.Module):
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
-        x = self.layer4(x)
+        # x = self.layer4(x)
         
         if self.Linear:
             x = self.avgpool(x)
@@ -170,6 +170,6 @@ class ResNet(nn.Module):
             x = self.avgpool(x)
         return x
 def restnet18cbam(numberclass,cbam = False,linear=True):
-    return ResNet(BottleneckBlock, [2,2,2,2], num_classes=numberclass,cbam = cbam,linear=linear)
+    return ResNet(BottleneckBlock, [2,2,1], num_classes=numberclass,cbam = cbam,linear=linear)
 def restnet50cbam(numberclass,cbam = False,linear=True):
     return ResNet(ResidualBlock, [3,4,6,3], num_classes=numberclass,cbam = cbam,linear=linear)
